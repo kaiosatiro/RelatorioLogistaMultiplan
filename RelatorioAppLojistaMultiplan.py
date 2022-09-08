@@ -15,21 +15,24 @@ def limpar_entrada():
 def validadadosA(I, F):
     inicial = I
     final = F
-
-    if I[-1] not in ('0123456789/'): inicial = I[:-1]
-    if len(I) == 2: inicial = I[-2:] + '/'
-    elif len(I) == 3: inicial = I[:-1]
-    elif len(I) == 5: inicial = I + '/'
-    elif len(I) == 6: inicial = I[:-1]
-    elif len(I) > 10: inicial = I[:-1]
-
-    if F[-1] not in ('0123456789/'): final = F[:-1]
-    if len(F) == 2: final = F + '/'
-    elif len(F) == 3: final = F[:-1]
-    elif len(F) == 5: final = F + '/'
-    elif len(F) == 6: final = F[:-1]
-    elif len(F) > 10: final = F[:-1]  
-
+    try:  
+        if I[-1] not in ('0123456789/'): inicial = I[:-1]
+        if len(I) == 2: inicial = I[-2:] + '/'
+        elif len(I) == 3: inicial = I[:-1]
+        elif len(I) == 5: inicial = I + '/'
+        elif len(I) == 6: inicial = I[:-1]
+        elif len(I) > 10: inicial = I[:-1]
+    except IndexError:
+        pass
+    try:
+        if F[-1] not in ('0123456789/'): final = F[:-1]
+        if len(F) == 2: final = F + '/'
+        elif len(F) == 3: final = F[:-1]
+        elif len(F) == 5: final = F + '/'
+        elif len(F) == 6: final = F[:-1]
+        elif len(F) > 10: final = F[:-1]  
+    except IndexError:
+        pass
     return inicial, final
 
 
@@ -104,8 +107,6 @@ while True:
             if inicio and fim:
                 caminho = values['Escolher']
                 gerarelatorio(inicial, final, caminho)
-    except IndexError:
-        pass
     except TclError:
         pass
     except TypeError:
