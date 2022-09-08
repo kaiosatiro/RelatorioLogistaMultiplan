@@ -3,12 +3,14 @@ Aplicação que extrai o relatório no formato necessário para a Multiplan do b
 O programa deve ser compilado com o IP do banco, usuário e senha, da garagem que irá utilizá-lo.
 
 -- Primeiro se cria a VIEW:
+
 CREATE VIEW abonolojistamultiplan 
 AS SELECT ticketonline, tarifa, datahorasaida 
 FROM logrotativo  
 WHERE nometarifa IN ("NOME DAS TARIFAS REALACIONADAS AO APP LOGISTA"));
 
 -- Segundo se cria a role e a concede acesso unico á VIEW criada.
+
 --DROP ROLE multiplan;
 CREATE ROLE multiplan LOGIN
 ENCRYPTED PASSWORD 'md5(A SENHA CRIPTOGRAFADA EM MD5)'
